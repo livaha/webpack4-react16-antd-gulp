@@ -7,7 +7,6 @@
     "probuild": "webpack --progress --colors --config webpack.production.config.js",
     "devbuild": "webpack --progress --colors --config webpack.development.config.js",
     "start": "webpack-dev-server  --mode development --open --config webpack.development.config.js"
-
   },
   "keywords": [
     "react"
