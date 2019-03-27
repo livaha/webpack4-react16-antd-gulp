@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    mode:'development',
+    mode:'development',    
+    
     entry: {
         bundle: path.resolve(__dirname, './src/main.js'),
         //添加要打包在vendor里面的库
@@ -12,9 +13,17 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './build'),
-        filename: '[name].js'
+        //filename: '[name].js'
+        filename: 'scripts/bundle.js',
     },
+    // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
+    /**对小到中型的项目中，`eval-source-map`是一个很好的选项，再次强调你只应该开发阶段使用它 */
+    devtool: 'cheap-eval-source-map',  
+    /**让浏览器监听你的代码的修改，并自动刷新显示修改后的结果 */
     devServer: {
+        contentBase: "./public",//本地服务器所加载的页面所在的目录
+        historyApiFallback: true,//不跳转
+        inline: true,//实时刷新
         host: '0.0.0.0',
         port: 8080
     },
