@@ -2,18 +2,31 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+let GLOBALS = {
+    DEFINE_OBJ: {
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      __DEV__: true,
+    },
+  
+    folders: {
+      SRC: path.resolve(__dirname, 'src'),
+      COMPONENT: path.resolve(__dirname, 'src/components'),
+      BUILD: path.resolve(__dirname, 'build'),
+      BOWER: path.resolve(__dirname, 'bower_components'),
+      NPM: path.resolve(__dirname, 'node_modules'),
+    },
+};
 
 module.exports = {
     mode:'development',    
     
     entry: {
-        bundle: path.resolve(__dirname, './src/main.js'),
+        bundle: path.resolve(__dirname, './src/index.js'),
         //添加要打包在vendor里面的库
         vendors: ['react','react-dom','react-router'],
     },
     output: {
-        path: path.resolve(__dirname, './build'),
-        //filename: '[name].js'
+        path: GLOBALS.folders.BUILD,
         filename: 'scripts/bundle.js',
     },
     // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
@@ -83,8 +96,17 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+      alias: {
+        // 全局相对路径别名，处理相对路径过长和繁琐问题
+        '@': GLOBALS.folders.SRC
+      },
+    },
     performance: {
-        hints: false
+      /**为了加大文件允许体积，提升报错门栏。 */
+      hints: false, // enum
+      maxAssetSize: 24000000, // int (in bytes),
+      maxEntrypointSize: 40000000, // int (i bytes
     },
     optimization: {
         splitChunks: {

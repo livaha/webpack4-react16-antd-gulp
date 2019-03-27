@@ -2,17 +2,32 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+let GLOBALS = {
+    DEFINE_OBJ: {
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      __DEV__: true,
+    },
+  
+    folders: {
+      SRC: path.resolve(__dirname, 'src'),
+      COMPONENT: path.resolve(__dirname, 'src/components'),
+      BUILD: path.resolve(__dirname, 'build'),
+      BOWER: path.resolve(__dirname, 'bower_components'),
+      NPM: path.resolve(__dirname, 'node_modules'),
+    },
+};
+  
 module.exports = {
     mode:'production',
     entry: {
-        bundle: path.resolve(__dirname, './src/main.js'),
+        bundle: path.resolve(__dirname, './src/index_pub.js'),
         //添加要打包在vendor里面的库
         //vendors: ['react','react-dom','react-router'],
     },
     output: {
-        path: path.resolve(__dirname, './build'),
-        filename: '[name][hash].js'
+        path: GLOBALS.folders.BUILD,
+        filename: 'scripts/[name].bundle.js',
+        //filename: 'scripts/[name][hash].js'
     },
     module: {
         rules: [
@@ -91,10 +106,17 @@ module.exports = {
                 NODE_ENV: JSON.stringify("production")
             }
         }),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './src/index_pub.html', 
-            inject: 'body' 
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+          favicon: 'src/favicon.ico', //favicon存放路径
+          filename: 'index.html', //生成的html存放路径，相对于 path
+          template: 'src/index_pub.html', //html模板路径
+          inject: true, //允许插件修改哪些内容，包括head与body
+          hash: true, //为静态资源生成hash值
+          //chunks: ['manifest', 'vendors', 'app'], //需要引入的chunk，不配置就会引入所有页面的资源.名字来源于你的入口文件
+          minify: { //压缩HTML文件
+            removeComments: false, //移除HTML中的注释
+            collapseWhitespace: true //删除空白符与换行符
+          }
         }),
         new CleanWebpackPlugin(['dist',
             'build'], {
