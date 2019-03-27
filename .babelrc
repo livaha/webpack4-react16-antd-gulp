@@ -1,0 +1,12 @@
+  {
+    "presets": [
+    "latest",
+    "react",
+    "stage-0"
+    ],
+    "plugins": [
+      "transform-class-properties",
+      ["import", { "libraryName": "antd", "libraryDirectory": "lib"}, "ant"],
+      ["import", { "libraryName": "ant-mobile", "libraryDirectory": "lib"}, "ant-mobile"]
+    ]
+  }
