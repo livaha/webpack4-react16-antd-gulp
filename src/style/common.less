@@ -1,0 +1,45 @@
+@import './default.less';
+@import './loading.less';
+ul,li{
+    list-style: none;
+}
+body{
+    background-color: #f1f3f5;
+}
+.clearfix{
+    &::after{
+        content:' ';
+        clear:both;
+        display: block;
+        visibility: hidden;
+    }
+}
+.container{
+    display: flex;
+    .nav-left{
+        /*width:16%;
+        min-width: 180px;*/    
+        padding-top: 80px;
+        height: calc(100vh);/*100%的意思*/
+        background-color: #001528;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            display:none;
+        }
+    }
+    .main{
+        flex: 1;
+        padding-top: 80px;
+        height: calc(100vh);
+        background-color: @colorL;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            display:none;
+        }
+    }
+    .content{
+        position: relative;
+        padding: 20px;
+    }
+}
+

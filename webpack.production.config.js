@@ -52,10 +52,19 @@ module.exports = {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
             },
+            //{
+            //    //使用less配置
+            //    test: /\.less$/,
+            //    loader: "style-loader!css-loader"
+            //},
             {
-                //使用less配置
-                test: /\.less$/,
-                loader: "style-loader!css-loader"
+              test: /\.less$/,
+              exclude: /\.module\.less$/,     
+              use: [
+                'style-loader',
+                { loader: 'css-loader', options: { importLoaders: 1 } },
+                'less-loader'
+              ]
             },
             // {
             //     test: /\.(png|jpg|gif)$/,
@@ -84,6 +93,12 @@ module.exports = {
                 ]
             }
         ]
+    },
+    resolve: {
+      alias: {
+        // 全局相对路径别名，处理相对路径过长和繁琐问题
+        '@': GLOBALS.folders.SRC
+      },
     },
     performance: {
         hints: false

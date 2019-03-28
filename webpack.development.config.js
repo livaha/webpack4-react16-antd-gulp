@@ -63,10 +63,19 @@ module.exports = {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
             },
+            //{
+            //    //使用less配置
+            //    test: /\.less$/,
+            //    loader: "style-loader!css-loader"
+            //},
             {
-                //使用less配置
-                test: /\.less$/,
-                loader: "style-loader!css-loader"
+              test: /\.less$/,
+              exclude: /\.module\.less$/,     
+              use: [
+                'style-loader',
+                { loader: 'css-loader', options: { importLoaders: 1 } },
+                'less-loader'
+              ]
             },
             // {
             //     test: /\.(png|jpg|gif)$/,

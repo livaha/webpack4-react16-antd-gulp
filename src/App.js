@@ -1,27 +1,15 @@
+import React, { Component } from 'react';
+import {Provider} from 'react-redux'
+import store from './store';
 
-
-import React from 'react';
-import {Route, Switch } from 'react-router-dom';
-
-import Index from './pages/Index';
-
-const Main = () => (
-    <main style={{ height: '100%' }}>
-        <Switch>
-            <Route exact path="/" component={Index} />
-        </Switch>
-    </main>
-)
-
-class App extends React.Component {
-    render() {
-        return (
-            <div style={{ height:'100%'}}>
-                <Main/>
-            </div>
-        )
-    }
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        {this.props.children}
+      </Provider>
+    );
+  }
 }
 
 export default App;
-

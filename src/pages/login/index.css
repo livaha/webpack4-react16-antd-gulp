@@ -1,0 +1,16 @@
+#components-form-demo-normal-login{
+  position: relative;
+}
+#components-form-demo-normal-login .login-form {
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    top:35%;
+    margin-left: -150px;
+    margin-top:250px;
+
+  }
+
+  #components-form-demo-normal-login .login-form-button {
+    width: 100%;
+  }

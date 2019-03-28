@@ -1,0 +1,12 @@
+export const TICK_SCHE_REBOOT_MODE = 'sche_reboot_mode';
+export const TICK_REC_TIME = 'rectime';
+export const TICK_WEEKS = 'weeks';
+export const TICK_HOUR = 'hour';
+export const TICK_MINUTE = 'minute';
+export const SHOW_TICK_H1 = 't1hour';
+export const SHOW_TICK_M1 = 't1minute';
+export const TICK_ALL_CHECKED = 'all_checked'
+export const TICK_SCHEDULE_TIME = 'schedul_time'
+export const TICK_INIT_SCHEDULE_TIME = 'init_scheduled_time'
+export const TICK_CHECKED_LIST = 'checkedList'
+export const TICK_TIME_OF_DAY = 'time_of_day'
